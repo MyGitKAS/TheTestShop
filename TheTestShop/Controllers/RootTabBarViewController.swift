@@ -15,12 +15,13 @@ final class RootTabBarViewController: UITabBarController {
         self.tabBar.tintColor = Constants.mainColor
         self.tabBar.backgroundColor = .darkGray
         
-        let firstViewController = UIViewController()
+        let firstViewController = HomeViewController()
         let firstNavController = UINavigationController(rootViewController: firstViewController)
         firstViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .more, tag: 0)
 
-        let secondViewController = UIViewController()
-        secondViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)
+        let secondViewController = ContainerViewController()
+        let secondNavController = UINavigationController(rootViewController: secondViewController)
+        secondNavController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)
 
         let thirdViewController = UIViewController()
         let thirdNavController = UINavigationController(rootViewController: thirdViewController)
@@ -30,6 +31,6 @@ final class RootTabBarViewController: UITabBarController {
         let fourthNavController = UINavigationController(rootViewController: fourthViewController)
         fourthViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .contacts , tag: 3)
         
-        self.viewControllers = [firstNavController, secondViewController, thirdNavController, fourthViewController]
+        self.viewControllers = [firstNavController, secondNavController, thirdNavController, fourthNavController]
     }
 }

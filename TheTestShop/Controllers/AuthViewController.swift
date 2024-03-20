@@ -10,7 +10,6 @@ import UIKit
 class AuthViewController: UIViewController {
   
     private let coordinator: AuthCoordinator
-    
     private let firstNameTextField = CustomTextField(placeholder: "Name")
     private let lastNameTextField = CustomTextField(placeholder: "Last name")
     private let emailTextField = CustomTextField(placeholder: "Email")
@@ -64,24 +63,27 @@ class AuthViewController: UIViewController {
         setupConfiguration()
         setupConstraints()
     }
+}
 
-    private func setupConfiguration() {
+
+// MARK: - Private methods
+private extension AuthViewController {
+    
+    func setupConfiguration() {
         let _ = [titleLabel, firstNameTextField, lastNameTextField, emailTextField, passwordTextField, confirmPasswordTextField, errorLabel, registerButton].forEach {stackView.addArrangedSubview($0)}
         view.addSubview(stackView)
     }
     
-    @objc private func registerButtonTapped() {
+    @objc func registerButtonTapped() {
         coordinator.showRootTabBar()
     }
     
-    private func showError(_ message: String) {
+    func showError(_ message: String) {
         errorLabel.text = message
         errorLabel.isHidden = false
     }
-}
-
-extension AuthViewController {
-     func setupConstraints() {
+    
+    func setupConstraints() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
