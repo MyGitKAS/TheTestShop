@@ -41,8 +41,10 @@ class SideMenuViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         didSelectItem?(indexPath.row)
     }
-   
+}
+
 // MARK: - Private methods
+extension SideMenuViewController {
     private func getCategories() {
       //
     }

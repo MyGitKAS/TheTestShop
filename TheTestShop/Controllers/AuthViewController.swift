@@ -83,12 +83,18 @@ private extension AuthViewController {
         errorLabel.isHidden = false
     }
     
+    // MARK: - Setup constraints
     func setupConstraints() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30)
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: ConstantsAuthViewController.sidePadding),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -ConstantsAuthViewController.sidePadding)
         ])
     }
+}
+
+// MARK: - Constants
+fileprivate struct ConstantsAuthViewController {
+    static let sidePadding: CGFloat = 30
 }

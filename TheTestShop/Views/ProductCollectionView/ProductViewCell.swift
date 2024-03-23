@@ -69,6 +69,7 @@ private extension ProductViewCell {
         contentView.clipsToBounds = true
     }
     
+    // MARK: - Setup Constraints
     func setupConstraints() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false

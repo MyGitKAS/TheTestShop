@@ -63,6 +63,7 @@ private extension CatalogViewController {
         //
     }
     
+    // MARK: - Setup constraints
     func setupConstraints() {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         searchBar.translatesAutoresizingMaskIntoConstraints = false

@@ -2,23 +2,15 @@
 //  HomeViewController.swift
 //  TheTestShop
 //
-//  Created by Aleksey Kuhlenkov on 20.03.24.
+//  Created by Aleksey Kuhlenkov on 23.03.24.
 //
 
 import UIKit
 
-class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-
+class HomeViewController: UIViewController {
+    
+    private let customCollectionView = CustomCollectionView()
     private let searchBar = UISearchBar()
-    private let horizontalSlider = HorizontalSliderView()
-
-    private lazy var collectionView: ProductCollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let collectionView = ProductCollectionView(frame: view.frame, collectionViewLayout: layout)
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        return collectionView
-    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,52 +20,51 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
     }
 }
 
-// MARK: - UICollectionViewDataSource
-extension HomeViewController {
+// MARK: UICollectionViewDataSource, UICollectionViewDelegate
+extension HomeViewController: UISearchBarDelegate, UICollectionViewDataSource {
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return section == 0 ? 10 : 20
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductViewCell.identifier, for: indexPath) as! ProductViewCell
-        cell.configure()
-        return cell
+        if indexPath.section == 0 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SaleCollectionCell.identifier, for: indexPath) as! SaleCollectionCell
+            let img = UIImage(named: "test_sale")!
+            cell.configure(image: img, title: "Sale 30%")
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductViewCell.identifier, for: indexPath)
+            return cell
+        }
     }
 }
 
 // MARK: - Private methods
-
-private extension HomeViewController {
-    
-    func setupConfiguration() {
-        view.addSubview(horizontalSlider)
-        view.addSubview(collectionView)
-        collectionView.dataSource = self
-        collectionView.delegate = self
-    }
+extension HomeViewController {
     
     func setupSearchBar() {
         searchBar.delegate = self
         navigationItem.titleView = searchBar
     }
     
+    func setupConfiguration() {
+        view.addSubview(customCollectionView)
+        customCollectionView.collectionView.dataSource = self
+    }
     
+    // MARK: - Setup Constraints
     func setupConstraints() {
-        horizontalSlider.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        
+        customCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            horizontalSlider.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            horizontalSlider.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            horizontalSlider.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            horizontalSlider.heightAnchor.constraint(equalToConstant: 150),
-            
-            collectionView.topAnchor.constraint(equalTo: horizontalSlider.bottomAnchor, constant: 16),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            customCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            customCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            customCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            customCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
 }
-

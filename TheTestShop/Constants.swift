@@ -8,7 +8,7 @@
 import UIKit
 
 struct Constants {
-    static let mainColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
+    static let mainColor = #colorLiteral(red: 0.7957445271, green: 0, blue: 1, alpha: 1)
     static let elementCornerRadius: CGFloat = 10
 }
 
