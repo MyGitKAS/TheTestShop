@@ -27,7 +27,7 @@ final class RootTabBarViewController: UITabBarController {
         let thirdNavController = UINavigationController(rootViewController: thirdViewController)
         thirdNavController.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag: 2)
 
-        let fourthViewController = UIViewController()
+        let fourthViewController = UserInfoViewController()
         let fourthNavController = UINavigationController(rootViewController: fourthViewController)
         fourthViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .contacts , tag: 3)
         
