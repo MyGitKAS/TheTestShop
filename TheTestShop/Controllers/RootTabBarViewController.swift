@@ -23,7 +23,7 @@ final class RootTabBarViewController: UITabBarController {
         let secondNavController = UINavigationController(rootViewController: secondViewController)
         secondNavController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)
 
-        let thirdViewController = UIViewController()
+        let thirdViewController = CartViewController()
         let thirdNavController = UINavigationController(rootViewController: thirdViewController)
         thirdNavController.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag: 2)
 

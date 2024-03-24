@@ -60,7 +60,7 @@ private extension CatalogViewController {
     }
     
     func getProducts() {
-        //
+        //TODO: -
     }
     
     // MARK: - Setup constraints

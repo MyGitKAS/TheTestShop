@@ -46,7 +46,7 @@ extension UserInfoViewController {
     }
     
     @objc private func logoutButtonTapped() {
-        // Logout logic
+        //TODO: - Logout logic
     }
     
     // MARK: - Setup Constraints
