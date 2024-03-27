@@ -28,6 +28,7 @@ class ProductViewCell: UICollectionViewCell {
     private let cartButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "cart"), for: .normal)
+        button.addTarget(self, action: #selector(cartButtonTapped), for: .touchUpInside)
         button.layer.borderWidth = 1
         return button
     }()
@@ -39,26 +40,38 @@ class ProductViewCell: UICollectionViewCell {
         return label
     }()
     
+    var onCartButtonTapped: (() -> Void)?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupConfiguration()
         setupConstraints()
-        configure()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure() {
-        imageView.image = UIImage(named: "test")
-        titleLabel.text = "Сourgette caviar"
-        priceLabel.text = "333 $"
+    func configureWithProduct(_ product: Product) {
+        titleLabel.text = product.title
+        priceLabel.text = String(product.price ?? 0)
+        guard let imageUrl = product.image else {
+            imageView.image = PlaceholderImage.defaultImage
+            return
+        }
+        ImageLoaderService.shared.loadImage(from: imageUrl) { [weak self] image in
+                guard let self = self else { return }
+                self.imageView.image = image
+            }
     }
 }
 
 // MARK: - Private methods
 private extension ProductViewCell {
+    
+    @objc func cartButtonTapped() {
+        onCartButtonTapped?()
+    }
     
     func setupConfiguration() {
         contentView.addSubview(imageView)

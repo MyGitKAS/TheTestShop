@@ -28,10 +28,15 @@ class CartViewController: UIViewController {
         let button = UIButton()
         button.backgroundColor = .systemBlue
         button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = Constants.elementCornerRadius
         button.addTarget(self, action: #selector(placeOrder), for: .touchUpInside)
         return button
     }()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateView()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,6 +79,13 @@ private extension CartViewController {
         let alertController = UIAlertController(title: "Ваш заказ принят!", message: "Сумма: \(formattedSum)", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alertController, animated: true)
+    }
+    
+    func updateView() {
+        products = CartHolder.products
+        collectionView.reloadData()
+        totalSum = products.reduce(0) { $0 + ($1.price ?? 0) }
+        updateBottomButton()
     }
     
     func updateBottomButton() {

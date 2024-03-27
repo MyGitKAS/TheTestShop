@@ -4,6 +4,7 @@
 //
 //  Created by Aleksey Kuhlenkov on 23.03.24.
 //
+
 import UIKit
 
 class SaleCollectionCell: UICollectionViewCell {
@@ -35,9 +36,9 @@ class SaleCollectionCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(image: UIImage, title: String) {
-        imageView.image = image
-        titleLabel.text = title
+    func configureWith(model: Sale) {
+        imageView.image = model.image
+        titleLabel.text = model.title
     }
 }
 

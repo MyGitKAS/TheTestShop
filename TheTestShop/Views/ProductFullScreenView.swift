@@ -16,7 +16,7 @@ class ProductFullScreenView: UIView {
         
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -85,8 +85,15 @@ class ProductFullScreenView: UIView {
         priceLabel.text = "\(product.price ?? 0.0) $"
         descriptionLabel.text = product.description
         categoryLabel.text = product.category.rawValue.capitalized
-        ratingLabel.text = "Rating: \(product.rating.rate) ☆ (\(product.rating.count) reviews)"
-        imageView.image = UIImage(named: "test_sale")
+        ratingLabel.text = "Rating: \(product.rating.rate)☆ (\(product.rating.count) reviews)"
+        guard let imageUrl = product.image else {
+            imageView.image = PlaceholderImage.defaultImage
+            return
+        }
+        ImageLoaderService.shared.loadImage(from: imageUrl) { [weak self] image in
+                guard let self = self else { return }
+                self.imageView.image = image
+            }
     }
 }
 
@@ -110,6 +117,7 @@ private extension ProductFullScreenView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         mainVStack.translatesAutoresizingMaskIntoConstraints = false
         addToCartButton.translatesAutoresizingMaskIntoConstraints = false
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
@@ -128,7 +136,9 @@ private extension ProductFullScreenView {
             addToCartButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: ConstantsProductFullScreen.buttonPadding),
             addToCartButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -ConstantsProductFullScreen.buttonPadding),
             addToCartButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -ConstantsProductFullScreen.buttonPadding),
-            addToCartButton.heightAnchor.constraint(equalToConstant: ConstantsProductFullScreen.buttonHeight)
+            addToCartButton.heightAnchor.constraint(equalToConstant: ConstantsProductFullScreen.buttonHeight),
+            
+            descriptionLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -ConstantsProductFullScreen.leadingConstraint)
         ])
     }
 }
@@ -138,6 +148,6 @@ fileprivate struct ConstantsProductFullScreen {
     static let buttonPadding: CGFloat = 10
     static let buttonHeight: CGFloat = 50
     static let leadingConstraint: CGFloat = 20
-    static let imageViewHeight: CGFloat = 300
+    static let imageViewHeight: CGFloat = 450
     static let mainVStackTopAnchor: CGFloat = 50
 }
