@@ -11,7 +11,7 @@ struct CartHolder {
     
     static var products: Products = fakeProducts
     
-    func addProductInCart(_ product: Product) {
+    static func addProductInCart(_ product: Product) {
      //TODO: -
     }
 }

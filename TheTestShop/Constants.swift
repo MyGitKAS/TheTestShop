@@ -21,13 +21,13 @@ enum TextSize {
     func getSize() -> CGFloat {
         switch self {
         case .small:
-            return 10
+            return 12
         case .medium:
-            return 14
+            return 16
         case .large:
-            return 18
+            return 20
         case .extraLarge:
-            return 25
+            return 28
         }
     }
 }
