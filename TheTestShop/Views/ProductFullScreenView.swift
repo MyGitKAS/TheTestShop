@@ -61,14 +61,9 @@ class ProductFullScreenView: UIView {
         return stack
     }()
     
-    let addToCartButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.backgroundColor = Constants.mainColor
-        let image = UIImage(systemName: "cart")?.withTintColor(.white, renderingMode: .alwaysOriginal)
-        button.setImage(image, for: .normal)
-        button.layer.cornerRadius = Constants.elementCornerRadius
-        return button
-    }()
+    private  let cartButton = UIButton.cartButton(target: self, action: #selector(cartButtonTapped))
+    
+    var onCartButtonTapped: (() -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -100,12 +95,16 @@ class ProductFullScreenView: UIView {
 // MARK: - Private methods
 private extension ProductFullScreenView {
     
+    @objc func cartButtonTapped() {
+        onCartButtonTapped?()
+    }
+    
     func setupConfiguration() {
         backgroundColor = .white
         addSubview(scrollView)
         scrollView.addSubview(imageView)
         scrollView.addSubview(mainVStack)
-        addSubview(addToCartButton)
+        addSubview(cartButton)
         [titleLabel, priceLabel, descriptionLabel, categoryLabel, ratingLabel].forEach {
             mainVStack.addArrangedSubview($0)
         }
@@ -116,7 +115,7 @@ private extension ProductFullScreenView {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         imageView.translatesAutoresizingMaskIntoConstraints = false
         mainVStack.translatesAutoresizingMaskIntoConstraints = false
-        addToCartButton.translatesAutoresizingMaskIntoConstraints = false
+        cartButton.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -129,14 +128,14 @@ private extension ProductFullScreenView {
             mainVStack.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: ConstantsProductFullScreen.leadingConstraint),
             mainVStack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             
-            imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: ConstantsProductFullScreen.leadingConstraint),
+            imageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: ConstantsProductFullScreen.leadingConstraint),
             imageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             imageView.heightAnchor.constraint(equalToConstant: ConstantsProductFullScreen.imageViewHeight),
             
-            addToCartButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: ConstantsProductFullScreen.buttonPadding),
-            addToCartButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -ConstantsProductFullScreen.buttonPadding),
-            addToCartButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -ConstantsProductFullScreen.buttonPadding),
-            addToCartButton.heightAnchor.constraint(equalToConstant: ConstantsProductFullScreen.buttonHeight),
+            cartButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: ConstantsProductFullScreen.buttonPadding),
+            cartButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -ConstantsProductFullScreen.buttonPadding),
+            cartButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -ConstantsProductFullScreen.buttonPadding),
+            cartButton.heightAnchor.constraint(equalToConstant: ConstantsProductFullScreen.buttonHeight),
             
             descriptionLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -ConstantsProductFullScreen.leadingConstraint)
         ])
@@ -148,6 +147,6 @@ fileprivate struct ConstantsProductFullScreen {
     static let buttonPadding: CGFloat = 10
     static let buttonHeight: CGFloat = 50
     static let leadingConstraint: CGFloat = 20
-    static let imageViewHeight: CGFloat = 450
+    static let imageViewHeight: CGFloat = 350
     static let mainVStackTopAnchor: CGFloat = 50
 }

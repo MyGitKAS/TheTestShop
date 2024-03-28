@@ -30,18 +30,15 @@ class ProductFullScreenViewController: UIViewController {
         super.viewDidLoad()
         setupConfiguration()
     }
-
 }
 
 // MARK: - Private methods
 private extension ProductFullScreenViewController {
     
-    @objc func addToCart() {
-        //TODO: -
-    }
-    
     func setupConfiguration() {
         productScreenView.configureWithProduct(product)
-        productScreenView.addToCartButton.addTarget(self, action: #selector(addToCart), for: .touchUpInside)
+        productScreenView.onCartButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            CartHolder.addProductInCart(self.product)}
     }
 }

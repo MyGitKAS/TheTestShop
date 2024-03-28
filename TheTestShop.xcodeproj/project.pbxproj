@@ -12,6 +12,7 @@
 		3E4201A72BB4ACC700D984A9 /* UIViewController+Extension .swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4201A62BB4ACC700D984A9 /* UIViewController+Extension .swift */; };
 		3E4201A92BB4B3BE00D984A9 /* ImageLoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4201A82BB4B3BE00D984A9 /* ImageLoaderService.swift */; };
 		3E4201AB2BB4B77500D984A9 /* PlaceholderImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4201AA2BB4B77500D984A9 /* PlaceholderImage.swift */; };
+		3E4201AD2BB5949F00D984A9 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4201AC2BB5949F00D984A9 /* UIButton+Extension.swift */; };
 		3EEC98592BA9AFE600784EFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEC98582BA9AFE600784EFF /* AppDelegate.swift */; };
 		3EEC985B2BA9AFE600784EFF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEC985A2BA9AFE600784EFF /* SceneDelegate.swift */; };
 		3EEC98622BA9AFEA00784EFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EEC98612BA9AFEA00784EFF /* Assets.xcassets */; };
@@ -51,6 +52,7 @@
 		3E4201A62BB4ACC700D984A9 /* UIViewController+Extension .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension .swift"; sourceTree = "<group>"; };
 		3E4201A82BB4B3BE00D984A9 /* ImageLoaderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderService.swift; sourceTree = "<group>"; };
 		3E4201AA2BB4B77500D984A9 /* PlaceholderImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderImage.swift; sourceTree = "<group>"; };
+		3E4201AC2BB5949F00D984A9 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		3EEC98552BA9AFE600784EFF /* TheTestShop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheTestShop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EEC98582BA9AFE600784EFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3EEC985A2BA9AFE600784EFF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				3E4201A62BB4ACC700D984A9 /* UIViewController+Extension .swift */,
+				3E4201AC2BB5949F00D984A9 /* UIButton+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 				3EEC98CC2BAF00DB00784EFF /* UserInfoViewController.swift in Sources */,
 				3EEC98702BA9B08700784EFF /* AuthCoordinator.swift in Sources */,
 				3EEC989A2BAACF6100784EFF /* ContainerViewController.swift in Sources */,
+				3E4201AD2BB5949F00D984A9 /* UIButton+Extension.swift in Sources */,
 				3EEC98952BAACA2B00784EFF /* ProductViewCell.swift in Sources */,
 				3EEC989C2BAAD1FB00784EFF /* SideMenuViewController.swift in Sources */,
 				3EEC986E2BA9B06100784EFF /* AppCoordinator.swift in Sources */,

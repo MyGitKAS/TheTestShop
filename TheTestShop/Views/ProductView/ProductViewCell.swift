@@ -13,7 +13,7 @@ class ProductViewCell: UICollectionViewCell {
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -25,13 +25,7 @@ class ProductViewCell: UICollectionViewCell {
         return label
     }()
     
-    private let cartButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "cart"), for: .normal)
-        button.addTarget(self, action: #selector(cartButtonTapped), for: .touchUpInside)
-        button.layer.borderWidth = 1
-        return button
-    }()
+    private  let cartButton = UIButton.cartButton(target: self, action: #selector(cartButtonTapped))
     
     private let priceLabel: UILabel = {
         let label = UILabel()
@@ -54,7 +48,7 @@ class ProductViewCell: UICollectionViewCell {
     
     func configureWithProduct(_ product: Product) {
         titleLabel.text = product.title
-        priceLabel.text = String(product.price ?? 0)
+        priceLabel.text = String(product.price ?? 0) + "$"
         guard let imageUrl = product.image else {
             imageView.image = PlaceholderImage.defaultImage
             return
