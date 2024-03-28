@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ContainerViewController: UIViewController {
+class CatalogContainerViewController: UIViewController {
     
     private var isMenuOpen = false
     private let sideMenuViewController = SideMenuViewController()
@@ -24,7 +24,7 @@ class ContainerViewController: UIViewController {
 }
 
 // MARK: - Private methods
-private extension ContainerViewController {
+private extension CatalogContainerViewController {
 
     @objc private func toggleMenu() {
         isMenuOpen = !isMenuOpen
@@ -60,8 +60,10 @@ private extension ContainerViewController {
         view.addSubview(sideMenuViewController.view)
         sideMenuViewController.didMove(toParent: self)
         sideMenuViewController.view.frame = CGRect(x: -view.bounds.width / 2, y: 0, width: view.bounds.width / 2, height: view.bounds.height)
-        sideMenuViewController.didSelectItem = { [weak self] index in
-            self?.toggleMenu()
+        sideMenuViewController.didSelectItem = { [weak self] category in
+            guard let self = self else { return }
+            self.catalogViewController.updateData(forCategory: category)
+            self.toggleMenu()
         }
     }
 

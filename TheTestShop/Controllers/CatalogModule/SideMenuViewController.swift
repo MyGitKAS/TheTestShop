@@ -11,7 +11,7 @@ class SideMenuViewController: UITableViewController {
     
     private var categories: Categories?
     
-    var didSelectItem: ((Int) -> Void)?
+    var didSelectItem: ((String) -> Void)?
     
     init() {
         super.init(style: .plain)
@@ -39,13 +39,29 @@ class SideMenuViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        didSelectItem?(indexPath.row)
+        guard let categories = categories else { return }
+        didSelectItem?(categories[indexPath.row])
     }
 }
 
 // MARK: - Private methods
 extension SideMenuViewController {
     private func getCategories() {
-      //
+        ShopApiManager.shared.performRequest(for: .getAllCategories) { [weak self] (result: Result<Categories?, Error>) in
+            guard let self = self else { return }
+            switch result {
+                case .success(let categories):
+                    if let categories = categories {
+                        self.categories = categories
+                        DispatchQueue.main.async{
+                            self.tableView.reloadData()
+                        }
+                    } else {
+                        self.showErrorAlert(withMessage: "Categories found.")
+                    }
+                case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }

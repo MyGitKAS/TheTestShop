@@ -25,14 +25,14 @@
 		3EEC987B2BA9BEDA00784EFF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEC987A2BA9BEDA00784EFF /* Constants.swift */; };
 		3EEC98802BAA0BBA00784EFF /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEC987F2BAA0BBA00784EFF /* CustomTextField.swift */; };
 		3EEC98832BAA1CF300784EFF /* ShopApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEC98822BAA1CF300784EFF /* ShopApiManager.swift */; };
-		3EEC98852BAA1E8A00784EFF /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEC98842BAA1E8A00784EFF /* Endpoint.swift */; };
+		3EEC98852BAA1E8A00784EFF /* ShopApiEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEC98842BAA1E8A00784EFF /* ShopApiEndpoint.swift */; };
 		3EEC98882BAA1FDE00784EFF /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEC98872BAA1FDE00784EFF /* Product.swift */; };
 		3EEC988A2BAA201700784EFF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEC98892BAA201700784EFF /* User.swift */; };
 		3EEC988E2BAAC78A00784EFF /* CartHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEC988D2BAAC78A00784EFF /* CartHolder.swift */; };
 		3EEC98902BAAC98900784EFF /* CatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEC988F2BAAC98900784EFF /* CatalogViewController.swift */; };
 		3EEC98932BAAC9EB00784EFF /* ProductCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEC98922BAAC9EB00784EFF /* ProductCollectionView.swift */; };
 		3EEC98952BAACA2B00784EFF /* ProductViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEC98942BAACA2B00784EFF /* ProductViewCell.swift */; };
-		3EEC989A2BAACF6100784EFF /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEC98992BAACF6100784EFF /* ContainerViewController.swift */; };
+		3EEC989A2BAACF6100784EFF /* CatalogContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEC98992BAACF6100784EFF /* CatalogContainerViewController.swift */; };
 		3EEC989C2BAAD1FB00784EFF /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEC989B2BAAD1FB00784EFF /* SideMenuViewController.swift */; };
 		3EEC98C62BAE082000784EFF /* CustomCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEC98C52BAE081F00784EFF /* CustomCollectionView.swift */; };
 		3EEC98C82BAEE9AB00784EFF /* SaleCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEC98C72BAEE9AB00784EFF /* SaleCollectionCell.swift */; };
@@ -67,14 +67,14 @@
 		3EEC987A2BA9BEDA00784EFF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3EEC987F2BAA0BBA00784EFF /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		3EEC98822BAA1CF300784EFF /* ShopApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopApiManager.swift; sourceTree = "<group>"; };
-		3EEC98842BAA1E8A00784EFF /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		3EEC98842BAA1E8A00784EFF /* ShopApiEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopApiEndpoint.swift; sourceTree = "<group>"; };
 		3EEC98872BAA1FDE00784EFF /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		3EEC98892BAA201700784EFF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3EEC988D2BAAC78A00784EFF /* CartHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartHolder.swift; sourceTree = "<group>"; };
 		3EEC988F2BAAC98900784EFF /* CatalogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewController.swift; sourceTree = "<group>"; };
 		3EEC98922BAAC9EB00784EFF /* ProductCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionView.swift; sourceTree = "<group>"; };
 		3EEC98942BAACA2B00784EFF /* ProductViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewCell.swift; sourceTree = "<group>"; };
-		3EEC98992BAACF6100784EFF /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		3EEC98992BAACF6100784EFF /* CatalogContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogContainerViewController.swift; sourceTree = "<group>"; };
 		3EEC989B2BAAD1FB00784EFF /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		3EEC98C52BAE081F00784EFF /* CustomCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionView.swift; sourceTree = "<group>"; };
 		3EEC98C72BAEE9AB00784EFF /* SaleCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleCollectionCell.swift; sourceTree = "<group>"; };
@@ -201,7 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				3EEC98822BAA1CF300784EFF /* ShopApiManager.swift */,
-				3EEC98842BAA1E8A00784EFF /* Endpoint.swift */,
+				3EEC98842BAA1E8A00784EFF /* ShopApiEndpoint.swift */,
 				3E4201A82BB4B3BE00D984A9 /* ImageLoaderService.swift */,
 			);
 			path = NetworkLayer;
@@ -232,7 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				3EEC988F2BAAC98900784EFF /* CatalogViewController.swift */,
-				3EEC98992BAACF6100784EFF /* ContainerViewController.swift */,
+				3EEC98992BAACF6100784EFF /* CatalogContainerViewController.swift */,
 				3EEC989B2BAAD1FB00784EFF /* SideMenuViewController.swift */,
 			);
 			path = CatalogModule;
@@ -329,7 +329,7 @@
 				3EEC98902BAAC98900784EFF /* CatalogViewController.swift in Sources */,
 				3EEC98CC2BAF00DB00784EFF /* UserInfoViewController.swift in Sources */,
 				3EEC98702BA9B08700784EFF /* AuthCoordinator.swift in Sources */,
-				3EEC989A2BAACF6100784EFF /* ContainerViewController.swift in Sources */,
+				3EEC989A2BAACF6100784EFF /* CatalogContainerViewController.swift in Sources */,
 				3E4201AD2BB5949F00D984A9 /* UIButton+Extension.swift in Sources */,
 				3EEC98952BAACA2B00784EFF /* ProductViewCell.swift in Sources */,
 				3EEC989C2BAAD1FB00784EFF /* SideMenuViewController.swift in Sources */,
@@ -353,7 +353,7 @@
 				3EEC98D32BAF364300784EFF /* СartViewController.swift in Sources */,
 				3EEC985B2BA9AFE600784EFF /* SceneDelegate.swift in Sources */,
 				3EEC98792BA9BE7D00784EFF /* RootTabBarViewController.swift in Sources */,
-				3EEC98852BAA1E8A00784EFF /* Endpoint.swift in Sources */,
+				3EEC98852BAA1E8A00784EFF /* ShopApiEndpoint.swift in Sources */,
 				3EEC98752BA9BE1500784EFF /* Coordinator.swift in Sources */,
 				3EEC98D02BAF04DE00784EFF /* UserInfoView.swift in Sources */,
 				3EEC98C62BAE082000784EFF /* CustomCollectionView.swift in Sources */,

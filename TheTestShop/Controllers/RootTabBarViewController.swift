@@ -19,7 +19,7 @@ final class RootTabBarViewController: UITabBarController {
         let firstNavController = UINavigationController(rootViewController: firstViewController)
         firstViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .more, tag: 0)
 
-        let secondViewController = ContainerViewController()
+        let secondViewController = CatalogContainerViewController()
         let secondNavController = UINavigationController(rootViewController: secondViewController)
         secondNavController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)
 

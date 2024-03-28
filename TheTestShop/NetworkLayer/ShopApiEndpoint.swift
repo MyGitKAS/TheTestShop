@@ -9,7 +9,7 @@ import Foundation
 
 enum ShopApiEndpoint {
     case addUser(userData: [String: Any])
-    case getProductsInCategory(categoryId: Int)
+    case getProductsInCategory(category: String)
     case getAllCategories
     case getSingleProduct(productId: Int)
     case getAllProducts
@@ -23,8 +23,8 @@ enum ShopApiEndpoint {
         switch self {
         case .addUser:
             return baseURL.appendingPathComponent("/users")
-        case .getProductsInCategory(let categoryId):
-            return baseURL.appendingPathComponent("/products/category/\(categoryId)")
+        case .getProductsInCategory(let category):
+            return baseURL.appendingPathComponent("/products/category/\(category)")
         case .getAllCategories:
             return baseURL.appendingPathComponent("/products/categories")
         case .getSingleProduct(let productId):

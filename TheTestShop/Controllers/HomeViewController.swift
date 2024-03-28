@@ -66,7 +66,7 @@ extension HomeViewController: UISearchBarDelegate {
 extension HomeViewController {
     
     func getProducts() {
-        ShopApiManager.shared.performRequest(for: .getAllProducts) { [weak self] (result: Result<[Product]?, Error>) in
+        ShopApiManager.shared.performRequest(for: .getAllProducts) { [weak self] (result: Result<Products?, Error>) in
             guard let self = self else { return }
             switch result {
                 case .success(let products):
