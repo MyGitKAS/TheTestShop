@@ -33,6 +33,14 @@ class CartViewController: UIViewController {
         return button
     }()
     
+    private let emptyCartPlaceholder: UILabel = {
+           let label = UILabel()
+           label.text = "Cart is empty"
+           label.textAlignment = .center
+           label.isHidden = true
+           return label
+       }()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateView()
@@ -56,8 +64,6 @@ extension CartViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCartCell.identifier, for: indexPath) as! ProductCartCell
         let product = products[indexPath.row]
         cell.configureWithProduct(product)
-        
-        // TODO: -
         cell.onQuantityChanged = { [weak self] operationSum in
                 guard let self = self else { return }
                 DispatchQueue.main.async {
@@ -79,6 +85,11 @@ private extension CartViewController {
         let alertController = UIAlertController(title: "Ваш заказ принят!", message: "Сумма: \(formattedSum)", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alertController, animated: true)
+        CartHolder.removeAllProduct()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.updateView()
+        }
     }
     
     func updateView() {
@@ -86,6 +97,7 @@ private extension CartViewController {
         collectionView.reloadData()
         totalSum = products.reduce(0) { $0 + ($1.price ?? 0) }
         updateBottomButton()
+        emptyCartPlaceholder.isHidden = !products.isEmpty
     }
     
     func updateBottomButton() {
@@ -95,7 +107,9 @@ private extension CartViewController {
     
     func setupConfiguration() {
         view.addSubview(collectionView)
+        view.addSubview(emptyCartPlaceholder)
         view.addSubview(bottomButton)
+        self.navigationItem.title = "Cart"
         totalSum = products.reduce(0) { $0 + ($1.price ?? 0) }
     }
     
@@ -103,6 +117,7 @@ private extension CartViewController {
     func setupConstraints() {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         bottomButton.translatesAutoresizingMaskIntoConstraints = false
+        emptyCartPlaceholder.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -113,7 +128,10 @@ private extension CartViewController {
             bottomButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: ConstantsCartViewController.buttonPadding),
             bottomButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -ConstantsCartViewController.buttonPadding),
             bottomButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -ConstantsCartViewController.buttonPadding),
-            bottomButton.heightAnchor.constraint(equalToConstant: ConstantsCartViewController.buttonHeight)
+            bottomButton.heightAnchor.constraint(equalToConstant: ConstantsCartViewController.buttonHeight),
+            
+            emptyCartPlaceholder.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                        emptyCartPlaceholder.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
 }
