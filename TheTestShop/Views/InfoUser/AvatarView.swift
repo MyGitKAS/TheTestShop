@@ -47,8 +47,8 @@ class AvatarView: UIView {
     
 
     
-    func setup(image: UIImage, name: String) {
-        imageView.image = image
+    func configureWith(name: String) {
+        imageView.image = PlaceholderImage.defaultAvatarImage
         nameLabel.text = name
     }
 }
@@ -72,8 +72,14 @@ extension AvatarView {
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            imageView.widthAnchor.constraint(equalToConstant: 100),
-            imageView.heightAnchor.constraint(equalToConstant: 100)
+            imageView.widthAnchor.constraint(equalToConstant: ConstantsAvatarView.imageSize),
+            imageView.heightAnchor.constraint(equalToConstant: ConstantsAvatarView.imageSize)
         ])
     }
+}
+
+// MARK: - Constants
+fileprivate struct ConstantsAvatarView {
+    static let imageSize: CGFloat = 100
+
 }

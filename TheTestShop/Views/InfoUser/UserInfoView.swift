@@ -46,10 +46,10 @@ class UserInfoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup(email: String, address: String, phone: String) {
-        emailLabel.text = email
-        addressLabel.text = address
-        phoneLabel.text = phone
+    func configureWithUser(_ user: User) {
+        emailLabel.text = "Email:\(user.email)"
+        addressLabel.text = "Adress:\(user.address.city) \(user.address.street)"
+        phoneLabel.text = "Email:\(user.phone)"
     }
 }
 

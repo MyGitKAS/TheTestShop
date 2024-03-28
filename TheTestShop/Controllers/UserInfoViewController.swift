@@ -9,8 +9,8 @@ import UIKit
 
 class UserInfoViewController: UIViewController {
     
-    private let avatarView: UIView = AvatarView()
-    private let userInfoView: UIView = UserInfoView()
+    private let avatarView = AvatarView()
+    private let userInfoView = UserInfoView()
     
     private let logoutButton: UIButton = {
         let button = UIButton(type: .system)
@@ -30,12 +30,30 @@ class UserInfoViewController: UIViewController {
         super.viewDidLoad()
         setupConfiguration()
         setupConstraints()
+        getUser()
     }
 }
 
 
 // MARK: - Private methods
 extension UserInfoViewController {
+    
+    func getUser() {
+        ShopApiManager.shared.performRequest(for: .getUser(userId: 1)) { [weak self] (result: Result<User?, Error>) in
+            guard let self = self else { return }
+            switch result {
+                case .success(let user):
+                    if let user = user {
+                        DispatchQueue.main.async{
+                            self.avatarView.configureWith(name: user.name.firstname + user.name.firstname)
+                            self.userInfoView.configureWithUser(user)
+                        }
+                    }
+            case .failure(let error):
+                self.showErrorAlert(withMessage: "Error: \(error.localizedDescription)")
+            }
+        }
+    }
     
     func setupConfiguration() {
         view.backgroundColor = .white
@@ -56,7 +74,6 @@ extension UserInfoViewController {
             stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            //stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 }
