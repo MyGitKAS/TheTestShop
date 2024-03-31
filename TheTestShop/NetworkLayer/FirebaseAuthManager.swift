@@ -4,6 +4,7 @@
 //
 //  Created by Aleksey Kuhlenkov on 31.03.24.
 //
+
 import Foundation
 import Firebase
 import FirebaseAuth
@@ -35,10 +36,11 @@ class FirebaseAuthManager {
     }
     
     func signOut(completion: @escaping (Bool, Error?) -> Void) {
-        if let signOutError = try? Auth.auth().signOut() {
-            completion(false, signOutError as? Error)
-        } else {
+        do {
+            try Auth.auth().signOut()
             completion(true, nil)
+        } catch let signOutError {
+            completion(false, signOutError)
         }
     }
     

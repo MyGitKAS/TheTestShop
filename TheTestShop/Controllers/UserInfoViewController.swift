@@ -5,6 +5,10 @@
 //  Created by Aleksey Kuhlenkov on 23.03.24.
 //
 
+protocol UserInfoViewControllerDelegate: AnyObject {
+    func didRequestLogout()
+}
+
 import UIKit
 
 class UserInfoViewController: UIViewController {
@@ -26,6 +30,8 @@ class UserInfoViewController: UIViewController {
         return stack
     }()
     
+    weak var delegate: UserInfoViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupConfiguration()
@@ -33,7 +39,6 @@ class UserInfoViewController: UIViewController {
         getUser()
     }
 }
-
 
 // MARK: - Private methods
 extension UserInfoViewController {
@@ -64,7 +69,14 @@ extension UserInfoViewController {
     }
     
     @objc private func logoutButtonTapped() {
-        //TODO: - Logout logic
+        FirebaseAuthManager.shared.signOut { [weak self] success, error in
+            guard let self = self else { return }
+            if success {
+                self.delegate?.didRequestLogout()
+            } else if let error = error {
+                self.showErrorAlert(withMessage: "Error signing out: \(error.localizedDescription)")
+            }
+        }
     }
     
     // MARK: - Setup Constraints

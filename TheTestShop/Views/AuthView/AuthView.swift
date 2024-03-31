@@ -39,7 +39,7 @@ class AuthView: AuthBaseView {
     }
     
     var showRegistration: (() -> Void)?
-    var onLogin: (() -> Void)?
+    var onLogin: ((UserAuthData) -> Void)?
     
     override func setupConfiguration() {
         super.setupConfiguration()
@@ -53,8 +53,14 @@ private extension AuthView {
     
     @objc func loginButtonTapped() {
         textFields.forEach { $0.resignFirstResponder() }
+    
         if validateFields() {
-            onLogin?()
+            if let email = emailTextField.text, let password = passwordTextField.text {
+                let userAuthData = UserAuthData(email: email, password: password)
+                onLogin?(userAuthData)
+            }
+        } else {
+            showErrorLabel()
         }
     }
 
@@ -77,6 +83,10 @@ private extension AuthView {
         
         errorLabel.isHidden = true
         return true
+    }
+    
+    func showErrorLabel() {
+        errorLabel.isHidden = errorLabel.text?.isEmpty ?? true
     }
 }
 

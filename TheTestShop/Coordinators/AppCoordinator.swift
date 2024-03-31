@@ -27,6 +27,11 @@ class AppCoordinator: Coordinator {
             showAuthCoordinator()
         }
     }
+    
+    func logout() {
+        self.removeAllChildCoordinators()
+        self.start()
+    }
 
    func showAuthCoordinator() {
         let authCoordinator = AuthCoordinator()

@@ -8,6 +8,18 @@
 import UIKit
 
 final class RootTabBarViewController: UITabBarController {
+  
+    private let coordinator: RootCoordinator
+  
+    init(coordinator: RootCoordinator) {
+        self.coordinator = coordinator
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,9 +40,18 @@ final class RootTabBarViewController: UITabBarController {
         thirdNavController.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag: 2)
 
         let fourthViewController = UserInfoViewController()
+        fourthViewController.delegate = self
         let fourthNavController = UINavigationController(rootViewController: fourthViewController)
-        fourthViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .contacts , tag: 3)
+        fourthViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .contacts, tag: 3)
         
         self.viewControllers = [firstNavController, secondNavController, thirdNavController, fourthNavController]
     }
 }
+
+extension RootTabBarViewController: UserInfoViewControllerDelegate {
+    func didRequestLogout() {
+        coordinator.didRequestLogout()
+    }
+}
+
+

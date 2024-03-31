@@ -38,18 +38,25 @@ extension AuthViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let authResult):
-                    print("Успешная регистрация: \(authResult.user.uid)")
+                    print("success: \(authResult.user.uid)")
                     self.coordinator.showRootTabBar()
                 case .failure(let error):
-                    self.showErrorAlert(withMessage: "Ошибка регистрации: \(error.localizedDescription)")
+                    self.showErrorAlert(withMessage: "Registration error: \(error.localizedDescription)")
                 }
             }
         }
     }
     
-    func LoginButtonTapped() {
-        //  логин
-        coordinator.showRootTabBar()
+    func LoginButtonTapped(userAuthData: UserAuthData) {
+        FirebaseAuthManager.shared.signInWithEmail(email: userAuthData.email, password: userAuthData.password) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(_):
+                self.coordinator.showRootTabBar()
+            case .failure(let error):
+                self.showErrorAlert(withMessage: "Login error: \(error.localizedDescription)")
+            }
+        }
     }
     
     func setupInitialView() {
@@ -77,9 +84,9 @@ extension AuthViewController {
             self.showRegistration()
         }
         
-        authView.onLogin = { [weak self] in
+        authView.onLogin = { [weak self] userAuthData in
             guard let self = self else { return }
-            self.LoginButtonTapped()
+            self.LoginButtonTapped(userAuthData: userAuthData)
         }
         
         registrationView.onRegistration = { [weak self] userAuthData in
