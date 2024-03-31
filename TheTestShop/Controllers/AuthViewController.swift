@@ -25,6 +25,8 @@ class AuthViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //view.backgroundColor = #colorLiteral(red: 0.9443568679, green: 0.9443568679, blue: 0.9443568679, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         setupButtonActions()
     }
 }

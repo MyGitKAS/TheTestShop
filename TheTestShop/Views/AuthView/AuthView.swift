@@ -22,7 +22,7 @@ class AuthView: AuthBaseView {
     
     let registerationButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Register", for: .normal)
+        button.setTitle("Create account", for: .normal)
         button.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -70,13 +70,13 @@ private extension AuthView {
     
     func validateFields() -> Bool {
         guard let email = emailTextField.text, email.isValid(validType: .email) else {
-            errorLabel.text = "Please enter a valid email address."
+            errorLabel.text = ValidationError.invalidEmail.rawValue
             errorLabel.isHidden = false
             return false
         }
         
         guard let password = passwordTextField.text, password.isValid(validType: .password) else {
-            errorLabel.text = "Please enter your password."
+            errorLabel.text = ValidationError.invalidPassword.rawValue
             errorLabel.isHidden = false
             return false
         }

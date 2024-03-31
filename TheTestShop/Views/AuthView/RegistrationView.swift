@@ -74,22 +74,22 @@ private extension RegistrationView {
               let email = emailTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !password.isEmpty,
               let confirmPassword = confirmPasswordTextField.text, !confirmPassword.isEmpty else {
-            errorLabel.text = "Please fill in all fields."
+                  errorLabel.text = ValidationError.emptyFields.rawValue
             return false
         }
         
         guard email.isValid(validType: .email) else {
-            errorLabel.text = "Invalid email address."
+            errorLabel.text = ValidationError.invalidEmail.rawValue
             return false
         }
         
         guard password.isValid(validType: .password) else {
-            errorLabel.text = "Password must contain at least one letter and one digit at least 8 characters long"
+            errorLabel.text = ValidationError.incorrectPassword.rawValue
             return false
         }
         
         guard password == confirmPassword else {
-            errorLabel.text = "Passwords do not match."
+            errorLabel.text = ValidationError.passwordMismatch.rawValue
             return false
         }
                 
@@ -126,4 +126,5 @@ extension RegistrationView: UITextFieldDelegate {
 // MARK: - Constants
 fileprivate struct ConstantsRegistrationView {
     static let closeButtonPadding: CGFloat = 10
+    
 }
