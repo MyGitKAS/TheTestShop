@@ -49,10 +49,9 @@ class UserInfoView: UIView {
     func configureWithUser(_ user: User) {
         emailLabel.text = "Email:\(user.email)"
         addressLabel.text = "Adress:\(user.address.city) \(user.address.street)"
-        phoneLabel.text = "Email:\(user.phone)"
+        phoneLabel.text = "Tel.:\(user.phone)"
     }
 }
-
 
 // MARK: - Private methods
 extension UserInfoView {

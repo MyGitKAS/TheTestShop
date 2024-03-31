@@ -82,7 +82,7 @@ private extension CartViewController {
 
     @objc func placeOrder() {
         let formattedSum = String(format: "%.2f", totalSum)
-        let alertController = UIAlertController(title: "Ваш заказ принят!", message: "Сумма: \(formattedSum)", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Your order has been accepted!", message: "Amount: \(formattedSum)", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alertController, animated: true)
         CartHolder.removeAllProduct()
@@ -102,7 +102,7 @@ private extension CartViewController {
     
     func updateBottomButton() {
         let formattedSum = String(format: "%.2f", totalSum)
-        bottomButton.setTitle("К оформлению: \(formattedSum)", for: .normal)
+        bottomButton.setTitle("Order: \(formattedSum)", for: .normal)
     }
     
     func setupConfiguration() {

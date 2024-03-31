@@ -60,4 +60,3 @@ struct Geolocation: Codable {
     var long: String
 }
 
-//let testUser = User(email: "Test@mail", username: "Hello", password: "12345X", name: Name(firstname: "TTTT", lastname: "UUU"), address: Address(city: "Misk", street: "Svoboda", number: 88888, zipcode: "34354-23231", geolocation: Geolocation(lat: "32321.545", long: "323.4")), phone: "+3333 000 9999999")

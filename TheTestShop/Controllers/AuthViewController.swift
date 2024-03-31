@@ -8,50 +8,15 @@
 import UIKit
 
 class AuthViewController: UIViewController {
-  
+    
     private let coordinator: AuthCoordinator
-    private let firstNameTextField = CustomTextField(placeholder: "Name")
-    private let lastNameTextField = CustomTextField(placeholder: "Last name")
-    private let emailTextField = CustomTextField(placeholder: "Email")
-    private let passwordTextField = CustomTextField(placeholder: "Password", isSecure: true)
-    private let confirmPasswordTextField = CustomTextField(placeholder: "Confirm password", isSecure: true)
-    
-    private let registerButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Registration", for: .normal)
-        button.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
-        return button
-    }()
-    
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Sign up"
-        label.font = UIFont.systemFont(ofSize: TextSize.extraLarge.getSize())
-        label.textColor = Constants.mainColor
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        return label
-    }()
-    
-    private let errorLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .red
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.isHidden = true
-        return label
-    }()
-    
-    private let stackView: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.spacing = 10
-        return stack
-    }()
+    private let authView = AuthView()
+    private let registrationView = RegistrationView()
     
     init(coordinator: AuthCoordinator) {
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
+        setupInitialView()
     }
 
     required init?(coder: NSCoder) {
@@ -60,41 +25,71 @@ class AuthViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupConfiguration()
-        setupConstraints()
+        setupButtonActions()
     }
 }
 
-
 // MARK: - Private methods
-private extension AuthViewController {
+extension AuthViewController {
     
-    func setupConfiguration() {
-        let _ = [titleLabel, firstNameTextField, lastNameTextField, emailTextField, passwordTextField, confirmPasswordTextField, errorLabel, registerButton].forEach {stackView.addArrangedSubview($0)}
-        view.addSubview(stackView)
+    func registerButtonTapped(userAuthData: UserAuthData) {
+        FirebaseAuthManager.shared.signUpWithEmail(email: userAuthData.email, password: userAuthData.password) { [weak self] result in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let authResult):
+                    print("Успешная регистрация: \(authResult.user.uid)")
+                    self.coordinator.showRootTabBar()
+                case .failure(let error):
+                    self.showErrorAlert(withMessage: "Ошибка регистрации: \(error.localizedDescription)")
+                }
+            }
+        }
     }
     
-    @objc func registerButtonTapped() {
+    func LoginButtonTapped() {
+        //  логин
         coordinator.showRootTabBar()
     }
     
-    func showError(_ message: String) {
-        errorLabel.text = message
-        errorLabel.isHidden = false
+    func setupInitialView() {
+        view.addSubview(authView)
+        authView.frame = view.bounds
     }
     
-    // MARK: - Setup constraints
-    func setupConstraints() {
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: ConstantsAuthViewController.sidePadding),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -ConstantsAuthViewController.sidePadding)
-        ])
+    func showRegistration() {
+        authView.removeFromSuperview()
+        view.addSubview(registrationView)
+        registrationView.frame = view.bounds
     }
-}
-
-// MARK: - Constants
-fileprivate struct ConstantsAuthViewController {
-    static let sidePadding: CGFloat = 30
+    
+    func showAuth() {
+        registrationView.removeFromSuperview()
+        view.addSubview(authView)
+        authView.frame = view.bounds
+    }
+    
+    // MARK: - Setup button actions
+    private func setupButtonActions() {
+        
+        authView.showRegistration = { [weak self] in
+            guard let self = self else { return }
+            self.showRegistration()
+        }
+        
+        authView.onLogin = { [weak self] in
+            guard let self = self else { return }
+            self.LoginButtonTapped()
+        }
+        
+        registrationView.onRegistration = { [weak self] userAuthData in
+            guard let self = self else { return }
+            self.registerButtonTapped(userAuthData: userAuthData)
+        }
+        
+        registrationView.onClose = { [weak self] in
+            guard let self = self else { return }
+            self.showAuth()
+        }
+    }
 }

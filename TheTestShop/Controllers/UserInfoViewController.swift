@@ -45,7 +45,7 @@ extension UserInfoViewController {
                 case .success(let user):
                     if let user = user {
                         DispatchQueue.main.async{
-                            self.avatarView.configureWith(name: user.name.firstname + user.name.firstname)
+                            self.avatarView.configureWith(name: "\(user.name.firstname) \(user.name.lastname)")
                             self.userInfoView.configureWithUser(user)
                         }
                     }

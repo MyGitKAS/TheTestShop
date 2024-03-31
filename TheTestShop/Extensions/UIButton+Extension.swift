@@ -18,4 +18,10 @@ extension UIButton {
         button.layer.cornerRadius = Constants.elementCornerRadius
         return button
     }
+    
+    func fillButton() {
+        self.layer.cornerRadius = Constants.elementCornerRadius
+        self.backgroundColor = Constants.mainColor
+        self.setTitleColor(UIColor.white, for: .normal)
+    }
 }
