@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProductFullScreenViewController: UIViewController {
+final class ProductFullScreenViewController: UIViewController {
     
     private var productScreenView: ProductFullScreenView!
     private let product: Product
@@ -34,7 +34,6 @@ class ProductFullScreenViewController: UIViewController {
 
 // MARK: - Private methods
 private extension ProductFullScreenViewController {
-    
     func setupConfiguration() {
         productScreenView.configureWithProduct(product)
         productScreenView.onCartButtonTapped = { [weak self] in

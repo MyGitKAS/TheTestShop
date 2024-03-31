@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AvatarView: UIView {
+final class AvatarView: UIView {
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -45,27 +45,25 @@ class AvatarView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-
-    
     func configureWith(name: String) {
         imageView.image = PlaceholderImage.defaultAvatarImage
-        nameLabel.text = name
+        nameLabel.text = name.uppercased()
     }
 }
 
 // MARK: - Private methods
 extension AvatarView {
-    
     func setupConfiguration() {
         stackView.addArrangedSubview(imageView)
         stackView.addArrangedSubview(nameLabel)
         addSubview(stackView)
     }
-    
-    // MARK: - Setup Constraints
-    func setupConstraints() {
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+}
 
+// MARK: - Setup Constraints
+extension AvatarView {
+    private func setupConstraints() {
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -81,5 +79,4 @@ extension AvatarView {
 // MARK: - Constants
 fileprivate struct ConstantsAvatarView {
     static let imageSize: CGFloat = 100
-
 }

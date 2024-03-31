@@ -7,7 +7,8 @@
 
 import UIKit
 
-class AuthCoordinator: Coordinator {
+final class AuthCoordinator: Coordinator {
+    
     var childCoordinators: [Coordinator] = []
     var parentCoordinator: Coordinator?
 

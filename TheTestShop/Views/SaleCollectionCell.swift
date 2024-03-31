@@ -7,13 +7,14 @@
 
 import UIKit
 
-class SaleCollectionCell: UICollectionViewCell {
+final class SaleCollectionCell: UICollectionViewCell {
    
     static let identifier = "SaleCollectionCell"
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = Constants.elementCornerRadius
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -42,17 +43,17 @@ class SaleCollectionCell: UICollectionViewCell {
     }
 }
 
-
 // MARK: - Private methods
 private extension SaleCollectionCell {
-    
     func setupConfiguration() {
         addSubview(imageView)
         addSubview(titleLabel)
     }
-    
-    // MARK: - Setup Constraints
-    func setupConstraints() {
+}
+
+// MARK: - Setup Constraints
+extension SaleCollectionCell {
+    private func setupConstraints() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         

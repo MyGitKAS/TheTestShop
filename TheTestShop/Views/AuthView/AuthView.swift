@@ -7,12 +7,12 @@
 
 import UIKit
 
-class AuthView: AuthBaseView {
+final class AuthView: AuthBaseView {
     
-    let emailTextField = CustomTextField(placeholder: "Email")
-    let passwordTextField = CustomTextField(placeholder: "Password", isSecure: true)
+   private let emailTextField = CustomTextField(placeholder: "Email")
+   private let passwordTextField = CustomTextField(placeholder: "Password", isSecure: true)
     
-    let loginButton: UIButton = {
+   private let loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Login", for: .normal)
         button.fillButton()
@@ -20,7 +20,7 @@ class AuthView: AuthBaseView {
         return button
     }()
     
-    let registerationButton: UIButton = {
+    private let registerationButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Create account", for: .normal)
         button.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
@@ -50,7 +50,6 @@ class AuthView: AuthBaseView {
 
 // MARK: - Private methods
 private extension AuthView {
-    
     @objc func loginButtonTapped() {
         textFields.forEach { $0.resignFirstResponder() }
     
@@ -92,7 +91,6 @@ private extension AuthView {
 
 // MARK: - UITextFieldDelegate
 extension AuthView: UITextFieldDelegate {
-    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         errorLabel.isHidden = true
     }

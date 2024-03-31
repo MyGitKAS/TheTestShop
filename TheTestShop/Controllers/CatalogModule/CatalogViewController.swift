@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CatalogViewController: UIViewController {
+final class CatalogViewController: UIViewController {
     
     private var products: Products?
     
@@ -63,7 +63,6 @@ extension CatalogViewController: UICollectionViewDelegate, UICollectionViewDataS
 
 // MARK: - Private methods
 private extension CatalogViewController {
-    
     func setupConfiguration() {
         view.backgroundColor = .white
         view.addSubview(searchBar)
@@ -81,7 +80,6 @@ private extension CatalogViewController {
         switch result {
             case .success(let products):
                 if let products = products {
-                    //self.products = products
                     DispatchQueue.main.async {
                         self.products = products
                         self.collectionView.reloadData()
@@ -94,12 +92,13 @@ private extension CatalogViewController {
                 showErrorAlert(withMessage: "Error: \(error.localizedDescription)")
         }
     }
-    
-    // MARK: - Setup constraints
-    func setupConstraints() {
+}
+
+// MARK: - Setup Constraints
+extension CatalogViewController {
+    private func setupConstraints() {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         searchBar.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),

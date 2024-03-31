@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 final class CartCollectionView: UICollectionView {
 
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {

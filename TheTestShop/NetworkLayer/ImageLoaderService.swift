@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ImageLoaderService {
+final class ImageLoaderService {
     static let shared = ImageLoaderService()
 
     private init() {}

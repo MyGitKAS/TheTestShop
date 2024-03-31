@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProductViewCell: UICollectionViewCell {
+final class ProductViewCell: UICollectionViewCell {
     
     static let identifier = "ProductViewCell"
     
@@ -25,14 +25,14 @@ class ProductViewCell: UICollectionViewCell {
         return label
     }()
     
-    private  let cartButton = UIButton.cartButton(target: self, action: #selector(cartButtonTapped))
-    
     private let priceLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: TextSize.large.getSize(), weight: .regular)
         return label
     }()
+    
+    private  let cartButton = UIButton.cartButton(target: self, action: #selector(cartButtonTapped))
     
     var onCartButtonTapped: (() -> Void)?
     
@@ -56,13 +56,12 @@ class ProductViewCell: UICollectionViewCell {
         ImageLoaderService.shared.loadImage(from: imageUrl) { [weak self] image in
                 guard let self = self else { return }
                 self.imageView.image = image
-            }
+        }
     }
 }
 
 // MARK: - Private methods
 private extension ProductViewCell {
-    
     @objc func cartButtonTapped() {
         onCartButtonTapped?()
     }
@@ -75,9 +74,11 @@ private extension ProductViewCell {
         contentView.layer.cornerRadius = 8
         contentView.clipsToBounds = true
     }
-    
-    // MARK: - Setup Constraints
-    func setupConstraints() {
+}
+
+// MARK: - Setup Constraints
+extension ProductViewCell {
+    private func setupConstraints() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         priceLabel.translatesAutoresizingMaskIntoConstraints = false

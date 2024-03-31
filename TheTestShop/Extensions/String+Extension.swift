@@ -8,7 +8,7 @@
 import Foundation
 
 extension String {
-
+    
     enum ValidTypes {
         case name
         case email

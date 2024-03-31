@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SideMenuViewController: UITableViewController {
+final class SideMenuViewController: UITableViewController {
     
     private var categories: Categories?
     

@@ -5,13 +5,13 @@
 //  Created by Aleksey Kuhlenkov on 23.03.24.
 //
 
+import UIKit
+
 protocol UserInfoViewControllerDelegate: AnyObject {
     func didRequestLogout()
 }
 
-import UIKit
-
-class UserInfoViewController: UIViewController {
+final class UserInfoViewController: UIViewController {
     
     private let avatarView = AvatarView()
     private let userInfoView = UserInfoView()
@@ -42,7 +42,6 @@ class UserInfoViewController: UIViewController {
 
 // MARK: - Private methods
 extension UserInfoViewController {
-    
     func getUser() {
         ShopApiManager.shared.performRequest(for: .getUser(userId: 1)) { [weak self] (result: Result<User?, Error>) in
             guard let self = self else { return }
@@ -78,9 +77,11 @@ extension UserInfoViewController {
             }
         }
     }
-    
-    // MARK: - Setup Constraints
-    func setupConstraints() {
+}
+
+// MARK: - Setup Constraints
+extension UserInfoViewController {
+    private func setupConstraints() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CatalogContainerViewController: UIViewController {
+final class CatalogContainerViewController: UIViewController {
     
     private var isMenuOpen = false
     private let sideMenuViewController = SideMenuViewController()
@@ -40,7 +40,6 @@ private extension CatalogContainerViewController {
         view.addSubview(catalogViewController.view)
         catalogViewController.didMove(toParent: self)
         catalogViewController.view.frame = view.bounds
-
         navigationItem.title = "Catalog"
         menuButton = UIBarButtonItem(title: "Menu", style: .plain, target: self, action: #selector(toggleMenu))
         navigationItem.leftBarButtonItem = menuButton

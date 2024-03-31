@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AuthViewController: UIViewController {
+final class AuthViewController: UIViewController {
     
     private let coordinator: AuthCoordinator
     private let authView = AuthView()
@@ -25,14 +25,16 @@ class AuthViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //view.backgroundColor = #colorLiteral(red: 0.9443568679, green: 0.9443568679, blue: 0.9443568679, alpha: 1)
-        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        setupConfiguration()
         setupButtonActions()
     }
 }
 
 // MARK: - Private methods
 extension AuthViewController {
+    func setupConfiguration() {
+        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+    }
     
     func registerButtonTapped(userAuthData: UserAuthData) {
         FirebaseAuthManager.shared.signUpWithEmail(email: userAuthData.email, password: userAuthData.password) { [weak self] result in
@@ -80,7 +82,6 @@ extension AuthViewController {
     
     // MARK: - Setup button actions
     private func setupButtonActions() {
-        
         authView.showRegistration = { [weak self] in
             guard let self = self else { return }
             self.showRegistration()

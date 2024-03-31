@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UserInfoView: UIView {
+final class UserInfoView: UIView {
     
     private let emailLabel: UILabel = {
         let label = UILabel()
@@ -47,26 +47,26 @@ class UserInfoView: UIView {
     }
     
     func configureWithUser(_ user: User) {
-        emailLabel.text = "Email:\(user.email)"
-        addressLabel.text = "Adress:\(user.address.city) \(user.address.street)"
-        phoneLabel.text = "Tel.:\(user.phone)"
+        emailLabel.text = "Email: \(user.email)"
+        addressLabel.text = "Adress: \(user.address.city) \(user.address.street)"
+        phoneLabel.text = "Tel.: \(user.phone)"
     }
 }
 
 // MARK: - Private methods
 extension UserInfoView {
-    
     func setupConfiguration() {
         stackView.addArrangedSubview(emailLabel)
         stackView.addArrangedSubview(addressLabel)
         stackView.addArrangedSubview(phoneLabel)
         addSubview(stackView)
     }
-    
-    // MARK: - Setup Constraints
-    func setupConstraints() {
+}
+
+// MARK: - Setup Constraints
+extension UserInfoView {
+    private func setupConstraints() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),

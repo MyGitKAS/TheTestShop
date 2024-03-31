@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RegistrationView: AuthBaseView {
+final class RegistrationView: AuthBaseView {
     
     private let firstNameTextField = CustomTextField(placeholder: "Name")
     private let lastNameTextField = CustomTextField(placeholder: "Last name")
@@ -55,7 +55,6 @@ class RegistrationView: AuthBaseView {
 
 // MARK: - Private methods
 private extension RegistrationView {
-    
     @objc func registrationButtonTapped() {
         textFields.forEach {$0.resignFirstResponder()}
         if validateFields() {
@@ -103,28 +102,27 @@ private extension RegistrationView {
     @objc func closeButtonTapped() {
         onClose?()
     }
-    
-    // MARK: - Setup Constraints
-    func setupConstraints() {
-        closeButton.translatesAutoresizingMaskIntoConstraints = false
-         
-         NSLayoutConstraint.activate([
-            closeButton.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: ConstantsRegistrationView.closeButtonPadding),
-             closeButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -ConstantsRegistrationView.closeButtonPadding)
-         ])
-    }
 }
 
 // MARK: - UITextFieldDelegate
 extension RegistrationView: UITextFieldDelegate {
-    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         errorLabel.isHidden = true
+    }
+}
+
+// MARK: - Setup Constraints
+extension RegistrationView {
+    private func setupConstraints() {
+         closeButton.translatesAutoresizingMaskIntoConstraints = false
+         NSLayoutConstraint.activate([
+            closeButton.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: ConstantsRegistrationView.closeButtonPadding),
+            closeButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -ConstantsRegistrationView.closeButtonPadding)
+         ])
     }
 }
 
 // MARK: - Constants
 fileprivate struct ConstantsRegistrationView {
     static let closeButtonPadding: CGFloat = 10
-    
 }

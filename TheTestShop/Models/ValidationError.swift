@@ -15,5 +15,3 @@ enum ValidationError: String {
     case invalidPassword = "Please enter your password."
 }
 
-
-// "Please enter your password."

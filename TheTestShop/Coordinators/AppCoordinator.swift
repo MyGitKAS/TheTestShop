@@ -7,13 +7,13 @@
 
 import UIKit
 
-class AppCoordinator: Coordinator {
+final class AppCoordinator: Coordinator {
     
     let window: UIWindow
     var childCoordinators: [Coordinator] = []
     var parentCoordinator: Coordinator?
-    var authCoordinator: AuthCoordinator?
-    var rootCoordinator: RootCoordinator?
+    private var authCoordinator: AuthCoordinator?
+    private var rootCoordinator: RootCoordinator?
 
     init(window: UIWindow) {
         self.window = window

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomCollectionView: UIView {
+final class CustomCollectionView: UIView {
     
     let collectionView: UICollectionView
     
@@ -21,8 +21,11 @@ class CustomCollectionView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    private func setupCollectionView() {
+}
+
+// MARK: - Private methods
+private extension CustomCollectionView {
+     func setupCollectionView() {
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = .white
         collectionView.register(SaleCollectionCell.self, forCellWithReuseIdentifier: SaleCollectionCell.identifier)
@@ -56,5 +59,4 @@ class CustomCollectionView: UIView {
         }
     }
 }
-
 

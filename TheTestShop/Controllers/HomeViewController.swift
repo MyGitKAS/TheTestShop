@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController {
     
     private var products: Products?
     private let customCollectionView = CustomCollectionView()
@@ -24,7 +24,6 @@ class HomeViewController: UIViewController {
 
 // MARK: UICollectionViewDataSource, UICollectionViewDelegate
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 1 {
             guard let products = products else { return }
@@ -64,7 +63,6 @@ extension HomeViewController: UISearchBarDelegate {
 
 // MARK: - Private methods
 extension HomeViewController {
-    
     func getProducts() {
         ShopApiManager.shared.performRequest(for: .getAllProducts) { [weak self] (result: Result<Products?, Error>) in
             guard let self = self else { return }
@@ -94,9 +92,11 @@ extension HomeViewController {
         customCollectionView.collectionView.dataSource = self
         customCollectionView.collectionView.delegate = self
     }
-    
-    // MARK: - Setup Constraints
-    func setupConstraints() {
+}
+
+// MARK: - Setup Constraints
+extension HomeViewController {
+    private func setupConstraints() {
         customCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             customCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),

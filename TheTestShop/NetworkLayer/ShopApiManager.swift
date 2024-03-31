@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ShopApiManager {
+final class ShopApiManager {
     static let shared = ShopApiManager()
 
     func performRequest<T: Decodable>(for endpoint: ShopApiEndpoint, completion: @escaping (Result<T?, Error>) -> Void) {
@@ -29,9 +29,7 @@ class ShopApiManager {
                         completion(.failure(error))
                     }
                 }
-            } else {
-                completion(.failure(NSError(domain: "com.thetestshop.app", code: 0, userInfo: [NSLocalizedDescriptionKey: "Unexpected response from server"])))
-            }
+            } 
         }
         task.resume()
     }

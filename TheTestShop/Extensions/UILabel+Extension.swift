@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 extension UILabel {
-    
     func errorLabel() {
         self.textColor = .red
         self.textAlignment = .center

@@ -33,8 +33,10 @@ class AuthBaseView: UIView {
     func addArrangedSubviews(_ views: [UIView]) {
         views.forEach { stackView.addArrangedSubview($0) }
     }
-    
-    // MARK: - Setup Constraints
+}
+
+// MARK: - Setup Constraints
+extension AuthBaseView {
     private func setupConstraints() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

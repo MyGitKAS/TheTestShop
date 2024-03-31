@@ -20,10 +20,16 @@ final class RootTabBarViewController: UITabBarController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupConfiguration()
+    }
+}
+
+// MARK: - Private methods
+private extension RootTabBarViewController {
+    func setupConfiguration() {
+        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         self.tabBar.tintColor = Constants.mainColor
         self.tabBar.backgroundColor = .darkGray
         
@@ -48,6 +54,7 @@ final class RootTabBarViewController: UITabBarController {
     }
 }
 
+// MARK: - UserInfoViewControllerDelegate
 extension RootTabBarViewController: UserInfoViewControllerDelegate {
     func didRequestLogout() {
         coordinator.didRequestLogout()

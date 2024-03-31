@@ -7,47 +7,47 @@
 
 import UIKit
 
-class ProductFullScreenView: UIView {
+final class ProductFullScreenView: UIView {
     
-    private lazy var scrollView: UIScrollView = {
+    private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         return scrollView
     }()
         
-    private lazy var imageView: UIImageView = {
+    private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         return imageView
     }()
     
-    private lazy var titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: TextSize.extraLarge.getSize())
         label.numberOfLines = 0
         return label
     }()
     
-    private lazy var priceLabel: UILabel = {
+    private let priceLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: TextSize.large.getSize(), weight: .semibold)
         return label
     }()
     
-    private lazy var descriptionLabel: UILabel = {
+    private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: TextSize.medium.getSize())
         label.numberOfLines = 0
         return label
     }()
     
-    private lazy var categoryLabel: UILabel = {
+    private let categoryLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.italicSystemFont(ofSize: TextSize.medium.getSize())
         return label
     }()
     
-    private lazy var ratingLabel: UILabel = {
+    private let ratingLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: TextSize.small.getSize())
         return label
@@ -61,7 +61,7 @@ class ProductFullScreenView: UIView {
         return stack
     }()
     
-    private  let cartButton = UIButton.cartButton(target: self, action: #selector(cartButtonTapped))
+    private let cartButton = UIButton.cartButton(target: self, action: #selector(cartButtonTapped))
     
     var onCartButtonTapped: (() -> Void)?
     
@@ -94,7 +94,6 @@ class ProductFullScreenView: UIView {
 
 // MARK: - Private methods
 private extension ProductFullScreenView {
-    
     @objc func cartButtonTapped() {
         onCartButtonTapped?()
     }
@@ -109,9 +108,11 @@ private extension ProductFullScreenView {
             mainVStack.addArrangedSubview($0)
         }
     }
-    
-    // MARK: - Setup Constraints
-    func setupConstraints() {
+}
+
+// MARK: - Setup Constraints
+extension ProductFullScreenView {
+    private func setupConstraints() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         imageView.translatesAutoresizingMaskIntoConstraints = false
         mainVStack.translatesAutoresizingMaskIntoConstraints = false
@@ -127,6 +128,7 @@ private extension ProductFullScreenView {
             mainVStack.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: ConstantsProductFullScreen.mainVStackTopAnchor),
             mainVStack.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: ConstantsProductFullScreen.leadingConstraint),
             mainVStack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            mainVStack.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor, constant: -ConstantsProductFullScreen.mainVStackTopAnchor),
             
             imageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: ConstantsProductFullScreen.leadingConstraint),
             imageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
@@ -148,5 +150,5 @@ fileprivate struct ConstantsProductFullScreen {
     static let buttonHeight: CGFloat = 50
     static let leadingConstraint: CGFloat = 20
     static let imageViewHeight: CGFloat = 350
-    static let mainVStackTopAnchor: CGFloat = 50
+    static let mainVStackTopAnchor: CGFloat = 70
 }

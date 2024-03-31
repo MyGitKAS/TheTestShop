@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CartViewController: UIViewController {
+final class CartViewController: UIViewController {
         
     private var products = CartHolder.products
     private var totalSum: Double = 0.0 {
@@ -24,7 +24,7 @@ class CartViewController: UIViewController {
         return collectionView
     }()
     
-    private var bottomButton: UIButton = {
+    private let bottomButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .systemBlue
         button.setTitleColor(.white, for: .normal)
@@ -79,10 +79,9 @@ extension CartViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 // MARK: - Private methods
 private extension CartViewController {
-
     @objc func placeOrder() {
         let formattedSum = String(format: "%.2f", totalSum)
-        let alertController = UIAlertController(title: "Your order has been accepted!", message: "Amount: \(formattedSum)", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Your order has been accepted!", message: "Amount: \(formattedSum)$", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alertController, animated: true)
         CartHolder.removeAllProduct()
@@ -102,7 +101,7 @@ private extension CartViewController {
     
     func updateBottomButton() {
         let formattedSum = String(format: "%.2f", totalSum)
-        bottomButton.setTitle("Order: \(formattedSum)", for: .normal)
+        bottomButton.setTitle("Order: \(formattedSum)$", for: .normal)
     }
     
     func setupConfiguration() {
@@ -112,9 +111,11 @@ private extension CartViewController {
         self.navigationItem.title = "Cart"
         totalSum = products.reduce(0) { $0 + ($1.price ?? 0) }
     }
-    
-    // MARK: - Setup Constraints
-    func setupConstraints() {
+}
+
+// MARK: - Setup Constraints
+extension CartViewController {
+    private func setupConstraints() {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         bottomButton.translatesAutoresizingMaskIntoConstraints = false
         emptyCartPlaceholder.translatesAutoresizingMaskIntoConstraints = false
