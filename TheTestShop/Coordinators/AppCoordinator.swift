@@ -20,7 +20,7 @@ class AppCoordinator: Coordinator {
     }
 
     func start() {
-        let isLoggedIn = false
+        let isLoggedIn = FirebaseAuthManager.shared.isUserLoggedIn()
         if isLoggedIn {
             showRootCoordinator()
         } else {
