@@ -61,6 +61,7 @@ final class ProductCartCell: UICollectionViewCell {
         button.backgroundColor = .lightGray
         let image = UIImage(systemName: "trash")
         button.setImage(image, for: .normal)
+        button.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -89,6 +90,7 @@ final class ProductCartCell: UICollectionViewCell {
     }()
     
     var onQuantityChanged: ((OperationSum) -> Void)?
+    var onDelete: (() -> Void)?
         
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -130,6 +132,10 @@ private extension ProductCartCell {
             quantityLabel.text = "\(quantity)"
             onQuantityChanged?(.minus)
         }
+    }
+    
+    @objc func deleteButtonTapped() {
+        onDelete?()
     }
     
     func setupConfiguration() {

@@ -15,7 +15,6 @@ final class SideMenuViewController: UITableViewController {
     
     init() {
         super.init(style: .plain)
-        getCategories()
        }
     
     required init?(coder: NSCoder) {
@@ -24,7 +23,7 @@ final class SideMenuViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "SideCell")
+        setupConfiguration()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -46,6 +45,11 @@ final class SideMenuViewController: UITableViewController {
 
 // MARK: - Private methods
 extension SideMenuViewController {
+    func setupConfiguration() {
+        getCategories()
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "SideCell")
+    }
+    
     private func getCategories() {
         ShopApiManager.shared.performRequest(for: .getAllCategories) { [weak self] (result: Result<Categories?, Error>) in
             guard let self = self else { return }

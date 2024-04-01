@@ -52,7 +52,6 @@ final class AuthView: AuthBaseView {
 private extension AuthView {
     @objc func loginButtonTapped() {
         textFields.forEach { $0.resignFirstResponder() }
-    
         if validateFields() {
             if let email = emailTextField.text, let password = passwordTextField.text {
                 let userAuthData = UserAuthData(email: email, password: password)

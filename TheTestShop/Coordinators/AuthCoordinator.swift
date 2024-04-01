@@ -5,7 +5,7 @@
 //  Created by Aleksey Kuhlenkov on 19.03.24.
 //
 
-import UIKit
+import Foundation
 
 final class AuthCoordinator: Coordinator {
     
@@ -14,7 +14,7 @@ final class AuthCoordinator: Coordinator {
 
     func start() {
         let authViewController = AuthViewController(coordinator: self)
-        (parentCoordinator as? AppCoordinator)?.window.rootViewController = authViewController
+        (parentCoordinator as? AppCoordinator)?.setRootViewController(authViewController)
     }
 
     func showRootTabBar() {

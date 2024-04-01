@@ -73,6 +73,15 @@ extension CartViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     }
                 }
             }
+        cell.onDelete = { [weak self] in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                CartHolder.removeProductAtIndex(index: indexPath.row)
+                self.products = CartHolder.products
+                self.totalSum = self.products.reduce(0) { $0 + ($1.price ?? 0) }
+                self.collectionView.reloadData()
+            }
+        }
         return cell
     }
 }

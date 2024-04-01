@@ -9,11 +9,12 @@ import UIKit
 
 final class AppCoordinator: Coordinator {
     
-    let window: UIWindow
-    var childCoordinators: [Coordinator] = []
-    var parentCoordinator: Coordinator?
+    private let window: UIWindow
     private var authCoordinator: AuthCoordinator?
     private var rootCoordinator: RootCoordinator?
+    
+    var childCoordinators: [Coordinator] = []
+    var parentCoordinator: Coordinator?
 
     init(window: UIWindow) {
         self.window = window
@@ -33,14 +34,15 @@ final class AppCoordinator: Coordinator {
         self.start()
     }
 
-   func showAuthCoordinator() {
+    func showAuthCoordinator() {
         let authCoordinator = AuthCoordinator()
         self.authCoordinator = authCoordinator
         addChildCoordinator(authCoordinator)
+        authCoordinator.parentCoordinator = self
         authCoordinator.start()
     }
 
-  func showRootCoordinator() {
+    func showRootCoordinator() {
         if let authCoordinator = authCoordinator {
             removeChildCoordinator(authCoordinator)
             self.authCoordinator = nil
@@ -48,6 +50,11 @@ final class AppCoordinator: Coordinator {
         let rootCoordinator = RootCoordinator()
         self.rootCoordinator = rootCoordinator
         addChildCoordinator(rootCoordinator)
+        rootCoordinator.parentCoordinator = self
         rootCoordinator.start()
+    }
+    
+    func setRootViewController(_ viewController: UIViewController) {
+        window.rootViewController = viewController
     }
 }

@@ -17,7 +17,8 @@ final class RootCoordinator: Coordinator {
     }()
 
     func start() {
-        (parentCoordinator as? AppCoordinator)?.window.rootViewController = tabBarController
+        let tabBarController = self.tabBarController
+        (parentCoordinator as? AppCoordinator)?.setRootViewController(tabBarController)
     }
     
     func didRequestLogout() {

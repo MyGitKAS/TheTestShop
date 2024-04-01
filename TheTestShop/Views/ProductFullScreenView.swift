@@ -133,6 +133,7 @@ extension ProductFullScreenView {
             imageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: ConstantsProductFullScreen.leadingConstraint),
             imageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             imageView.heightAnchor.constraint(equalToConstant: ConstantsProductFullScreen.imageViewHeight),
+            imageView.widthAnchor.constraint(equalToConstant: ConstantsProductFullScreen.imageViewHeight),
             
             cartButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: ConstantsProductFullScreen.buttonPadding),
             cartButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -ConstantsProductFullScreen.buttonPadding),

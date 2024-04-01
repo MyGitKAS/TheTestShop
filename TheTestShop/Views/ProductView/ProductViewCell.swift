@@ -71,7 +71,9 @@ private extension ProductViewCell {
         contentView.addSubview(priceLabel)
         contentView.addSubview(titleLabel)
         contentView.addSubview(cartButton)
-        contentView.layer.cornerRadius = 8
+        contentView.layer.borderWidth = 1
+        contentView.layer.borderColor = UIColor.lightGray.cgColor
+        contentView.layer.cornerRadius = Constants.elementCornerRadius
         contentView.clipsToBounds = true
     }
 }

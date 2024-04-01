@@ -33,7 +33,6 @@ extension String {
         case .password:
             regex = Regex.password.rawValue
         }
-
         return NSPredicate(format: format, regex).evaluate(with: self)
     }
 }

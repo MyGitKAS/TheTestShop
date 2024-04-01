@@ -20,7 +20,7 @@ final class CatalogViewController: UIViewController {
         return collectionView
     }()
     
-    private lazy var searchBar: UISearchBar = {
+    private let searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.placeholder = "Search"
         return searchBar

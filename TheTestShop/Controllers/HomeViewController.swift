@@ -30,8 +30,6 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             guard let products = products else { return }
             let vc = ProductFullScreenViewController(product: products[indexPath.row])
             navigationController?.pushViewController(vc, animated: true)
-        } else {
-            print("Prresent sale")
         }
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -40,7 +38,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
-            return 10 
+            return 5
         } else {
             return filteredProducts?.count ?? products?.count ?? 0
         }

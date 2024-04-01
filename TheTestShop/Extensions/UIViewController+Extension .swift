@@ -9,7 +9,8 @@ import UIKit
 
 extension UIViewController {
     func showErrorAlert(withMessage message: String) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
             let action = UIAlertAction(title: "OK", style: .default)
             alertController.addAction(action)
