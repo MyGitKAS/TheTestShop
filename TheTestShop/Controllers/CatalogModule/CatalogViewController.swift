@@ -10,6 +10,7 @@ import UIKit
 final class CatalogViewController: UIViewController {
     
     private var products: Products?
+    private var filteredProducts: Products?
     
     private lazy var collectionView: ProductCollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -43,12 +44,13 @@ final class CatalogViewController: UIViewController {
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension CatalogViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return products?.count ?? 0
+        return filteredProducts?.count ?? products?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductViewCell.identifier, for: indexPath) as! ProductViewCell
-        guard let products = products else { return cell }
+        let productList = filteredProducts ?? products
+        guard let products = productList else { return cell }
         cell.configureWithProduct(products[indexPath.row])
         cell.onCartButtonTapped = { CartHolder.addProductInCart(products[indexPath.row]) }
         return cell
@@ -61,12 +63,34 @@ extension CatalogViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
 }
 
+// MARK: - UISearchBarDelegate
+extension CatalogViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard !searchText.isEmpty else {
+            filteredProducts = products
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.collectionView.reloadData()
+            }
+            return
+        }
+        filteredProducts = products?.filter { product in
+            return product.title!.lowercased().contains(searchText.lowercased())
+        }
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.collectionView.reloadData()
+        }
+    }
+}
+
 // MARK: - Private methods
 private extension CatalogViewController {
     func setupConfiguration() {
         view.backgroundColor = .white
         view.addSubview(searchBar)
         view.addSubview(collectionView)
+        searchBar.delegate = self
     }
 
     func getProducts() {
@@ -80,7 +104,8 @@ private extension CatalogViewController {
         switch result {
             case .success(let products):
                 if let products = products {
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self = self else { return }
                         self.products = products
                         self.collectionView.reloadData()
                     }

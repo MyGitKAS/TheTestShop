@@ -80,6 +80,7 @@ extension CartViewController: UICollectionViewDelegate, UICollectionViewDataSour
 // MARK: - Private methods
 private extension CartViewController {
     @objc func placeOrder() {
+        guard totalSum > 0 else { return }
         let formattedSum = String(format: "%.2f", totalSum)
         let alertController = UIAlertController(title: "Your order has been accepted!", message: "Amount: \(formattedSum)$", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))

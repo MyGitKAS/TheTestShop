@@ -10,6 +10,7 @@ import UIKit
 final class HomeViewController: UIViewController {
     
     private var products: Products?
+    private var filteredProducts: Products?
     private let customCollectionView = CustomCollectionView()
     private let searchBar = UISearchBar()
 
@@ -36,9 +37,13 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 0 ? 10 : products?.count ?? 0
+        if section == 0 {
+            return 10 
+        } else {
+            return filteredProducts?.count ?? products?.count ?? 0
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -49,7 +54,8 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductViewCell.identifier, for: indexPath) as! ProductViewCell
-            guard let products = products else { return cell }
+            let productList = filteredProducts ?? products
+            guard let products = productList else { return cell }
             cell.configureWithProduct(products[indexPath.row])
             cell.onCartButtonTapped = { CartHolder.addProductInCart(products[indexPath.row]) }
             return cell
@@ -57,8 +63,25 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
 }
 
+// MARK: - UISearchBarDelegate
 extension HomeViewController: UISearchBarDelegate {
-    //TODO: -
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard !searchText.isEmpty else {
+            filteredProducts = products
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.customCollectionView.collectionView.reloadData()
+            }
+            return
+        }
+        filteredProducts = products?.filter { product in
+            return product.title!.lowercased().contains(searchText.lowercased())
+        }
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.customCollectionView.collectionView.reloadData()
+        }
+    }
 }
 
 // MARK: - Private methods
